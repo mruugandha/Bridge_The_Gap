@@ -1,0 +1,50 @@
+.navbar.navbar-light.fixed-top.navbar-expand-lg
+  .container
+    a.navbar-brand(href='/')
+      i.fas.fa-cube
+      | Bridge The Gap
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+      span.sr-only Toggle navigation
+      span.navbar-toggler-icon
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li.nav-item(class=(title === 'Home') ? 'active' : undefined)
+          a.nav-link(href='/') Home
+        if user
+            li.nav-item(class=(title === 'API') ? 'active' : undefined)
+              a.nav-link(href='/courses') Courses
+            if user.role == 'employer'
+              li.nav-item(class=(title === 'announcement') ? 'active' : undefined)
+                a.nav-link(href='/announcements') Create Announcement
+              li.nav-item(class=(title === 'Add') ? 'active' : undefined)
+                a.nav-link(href='/addCourse') Add Course
+              li.nav-item(class=(title === 'submissions') ? 'active' : undefined)
+                a.nav-link(href='/submissions') View Submissions
+            if user.role == 'student'
+              li.nav-item(class=(title === 'Assignments') ? 'active' : undefined)
+                a.nav-link(href='/api/upload') Submit Assignments
+              li.nav-item(class=(title === 'API') ? 'active' : undefined)
+                a.nav-link(href='/view-announcements') View Announcements
+        li.nav-item(class=(title === 'Contact') ? 'active' : undefined)
+          a.nav-link(href='/contact') Help
+      ul.nav.navbar-nav.ml-auto
+        if !user
+          li.nav-item(class=(title === 'Login') ? 'active' : undefined)
+            a.nav-link(href='/login') Login
+          li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)
+            a.nav-link(href='/signup') Create Account
+        else
+          li.dropdown(class=(title === 'Account Management') ? 'active' : undefined).nav-item
+            a.dropdown-toggle.nav-link(href='#', data-toggle='dropdown')
+              if user.profile.picture
+                img(src=user.profile.picture)
+              else
+                img(src=user.gravatar(60))
+              span= user.profile.name || user.email || user.id
+              i.caret
+            ul.dropdown-menu
+              li.dropdown-item
+                a(href='/account') My Account
+              li.divider.dropdown-item
+              li.dropdown-item
+                a(href='/logout') Logout

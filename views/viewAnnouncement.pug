@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h3 Announcements
+    .pb-2.mt-2.mb-4.border-bottom
+    
+        each a in announcements
+            .pb-2.mt-2.mb-4.border-bottom
+            div
+                h4 #{a.title}
+                div
+                    h6  #{a.announcement}
+            

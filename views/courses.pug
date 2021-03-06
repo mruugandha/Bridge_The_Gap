@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    
+    .pb-2.mt-2.mb-4.border-bottom
+        h3 Videos
+
+        each course in courses
+            div= course.title
+            div!= course.code

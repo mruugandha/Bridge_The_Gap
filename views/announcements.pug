@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 Bridge The Gap
+  p.lead A Single Stop for Students and Employers
+  hr
+  p Create a Announcement
+        form(action='/create-announcement', method='POST')  
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            label(for='pwd') Title:
+            input#pwd.form-control(type='input', name='title')
+          .form-group
+              label(for='video-code') Announcement:
+              textarea#video-code.form-control(rows="5", name='announcement')
+          button.btn.btn-default(type='submit') Create
